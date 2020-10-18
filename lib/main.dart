@@ -37,60 +37,72 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('App'),
-      ),
-      body: isPortrait
-          ? Container(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Switch(
-                        value: _isSwitched,
-                        onChanged: (value) {
-                          setState(() {
-                            _isSwitched = value;
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                  Container(
-                    height: size.height * 0.5,
-                    color: Colors.amberAccent,
-                    margin: EdgeInsets.all(20),
-                  ),
-                  Container(
-                    height: size.height * 0.1,
-                    color: Colors.amberAccent,
-                    margin: EdgeInsets.all(20),
-                  ),
-                ],
-              ),
-            )
-          : Container(
-              child: Row(
-                children: [
-                  Container(
-                    width: 300,
-                    color: Colors.red,
-                  ),
-                  Container(
-                    width: 300,
-                    color: Colors.purple,
-                  ),
-                ],
-              ),
+
+    Widget homeBody = isPortrait
+        ? Container(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Switch(
+                      value: _isSwitched,
+                      onChanged: (value) {
+                        setState(() {
+                          _isSwitched = value;
+                        });
+                      },
+                    )
+                  ],
+                ),
+                Container(
+                  height: size.height * 0.5,
+                  color: Colors.amberAccent,
+                  margin: EdgeInsets.all(20),
+                ),
+                Container(
+                  height: size.height * 0.1,
+                  color: Colors.amberAccent,
+                  margin: EdgeInsets.all(20),
+                ),
+              ],
             ),
-      floatingActionButton: Platform.isIOS
-          ? Container()
-          : FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {},
+          )
+        : Container(
+            child: Row(
+              children: [
+                Container(
+                  width: 300,
+                  color: Colors.red,
+                ),
+                Container(
+                  width: 300,
+                  color: Colors.purple,
+                ),
+              ],
             ),
-    );
+          );
+
+    Widget appBar = Platform.isIOS
+        ? CupertinoNavigationBar()
+        : AppBar(
+            title: Text('App'),
+          );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: homeBody,
+            navigationBar: appBar,
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: homeBody,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () {},
+                  ),
+          );
   }
 }
