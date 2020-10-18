@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _showChart = false;
+  bool _isSwitched = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Switch(
-                          value: _showChart,
-                          onChanged: (val) {
+                          value: _isSwitched,
+                          onChanged: (value) {
                             setState(() {
-                              _showChart = val;
+                              _isSwitched = value;
                             });
                           },
-                        ),
+                        )
                       ],
                     ),
                     Container(
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.all(20),
                     ),
                     Container(
-                      height: size.height * 0.1,
+                      height: size.height * 0.2,
                       color: Colors.amberAccent,
                       margin: EdgeInsets.all(20),
                     ),
