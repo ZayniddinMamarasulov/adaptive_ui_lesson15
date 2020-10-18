@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,52 +38,59 @@ class _HomePageState extends State<HomePage> {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     return Scaffold(
-        appBar: AppBar(
-          title: Text('App'),
-        ),
-        body: isPortrait
-            ? Container(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Switch(
-                          value: _isSwitched,
-                          onChanged: (value) {
-                            setState(() {
-                              _isSwitched = value;
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                    Container(
-                      height: size.height * 0.5,
-                      color: Colors.amberAccent,
-                      margin: EdgeInsets.all(20),
-                    ),
-                    Container(
-                      height: size.height * 0.2,
-                      color: Colors.amberAccent,
-                      margin: EdgeInsets.all(20),
-                    ),
-                  ],
-                ),
-              )
-            : Container(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 300,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      width: 300,
-                      color: Colors.purple,
-                    ),
-                  ],
-                ),
-              ));
+      appBar: AppBar(
+        title: Text('App'),
+      ),
+      body: isPortrait
+          ? Container(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Switch(
+                        value: _isSwitched,
+                        onChanged: (value) {
+                          setState(() {
+                            _isSwitched = value;
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                  Container(
+                    height: size.height * 0.5,
+                    color: Colors.amberAccent,
+                    margin: EdgeInsets.all(20),
+                  ),
+                  Container(
+                    height: size.height * 0.1,
+                    color: Colors.amberAccent,
+                    margin: EdgeInsets.all(20),
+                  ),
+                ],
+              ),
+            )
+          : Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: 300,
+                    color: Colors.red,
+                  ),
+                  Container(
+                    width: 300,
+                    color: Colors.purple,
+                  ),
+                ],
+              ),
+            ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {},
+            ),
+    );
   }
 }
